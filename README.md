@@ -1,1 +1,1 @@
-# React-js
+# Simple React JS Tutorial contetnt
