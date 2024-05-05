@@ -6,6 +6,12 @@
     grid-row-gap: 0px;
 }
 
+
+.customCalcButton:hover {
+    background-color: #04AA6D;
+    color: white;
+}
+
 .div1 {
     grid-area: 1 / 1 / 6 / 5;
 }
