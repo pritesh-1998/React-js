@@ -1,7 +1,8 @@
-export default function Alert() {
+/* eslint-disable react/prop-types */
+export default function Alert({ title }) {
     return <>
         <div className="alert alert-primary" role="alert">
-            A simple primary alert with <a href="#" className="alert-link">an example link</a>. Give it a click if you like.
+            {title}
         </div>
     </>
 }
