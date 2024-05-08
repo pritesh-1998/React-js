@@ -8,7 +8,7 @@ export default function Calc() {
     return (
         <div className="container">
             <Heading heading={"Simple Calculator"} />
-            <div className="container-fluid w-50">
+            <div className="">
                 <div className="row gx-3 justify-content-center my-3 my-3">
                     <div className="col-12">
                         <div className="input-group mb-3 border border-1 border-secondary">

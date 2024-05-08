@@ -20,9 +20,9 @@ function App() {
       {/* <Clock /> */}
       {/* <Healthyfood /> */}
       {/* <Todo /> */}
-      <Calc />
-      {/* <List listitems={bikes} />
-      <Heading heading={"Good Morning"} /> */}
+      {/* <Calc /> */}
+      <List listitems={bikes} />
+      {/* <Heading heading={"Good Morning"} /> */}
     </Container>
   )
 }
