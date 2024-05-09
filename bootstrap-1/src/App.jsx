@@ -21,7 +21,7 @@ function App() {
       {/* <Healthyfood /> */}
       {/* <Todo /> */}
       {/* <Calc /> */}
-      <List listitems={bikes} />
+      <List Listitems={bikes} />
       {/* <Heading heading={"Good Morning"} /> */}
     </Container>
   )
