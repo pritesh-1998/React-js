@@ -1,27 +1,73 @@
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
 import Alert from "./alert"
 import SingleTodo from "./TodoSingleItem"
+import { IoIosAddCircle } from "react-icons/io";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+
+// Try me!
 
 export default function Todo() {
+    let initialtodo = [{ id: 1, name: "Todo Task 1", date: "05/05/2024" }, { id: 2, name: "Todo Task 2", date: "05/05/2024" }, { id: 3, name: "Todo Task 3", date: "05/05/2024" }, { id: 4, name: "Todo Task 4", date: "05/05/2024" }, { id: 5, name: "Todo Task 5", date: "05/05/2024" }];
+    let [todo, setTodoList] = useState(initialtodo);
+    let [todoName, setTodoName] = useState("");
+    let [todoDate, setTodoDate] = useState("");
 
-    let todo = [{ id: 1, name: "Todo Task 1", date: "05/05/2024" }, { id: 2, name: "Todo Task 2", date: "05/05/2024" }, { id: 3, name: "Todo Task 3", date: "05/05/2024" }, { id: 4, name: "Todo Task 4", date: "05/05/2024" }, { id: 5, name: "Todo Task 5", date: "05/05/2024" }];
+    const addTask = (taskName, taskDate) => {
+        if (taskName != "" || taskDate != "") {
+            let count = todo.length;
+            let newTodoItem = [...todo, { id: count + 1, name: taskName, date: taskDate }];
+            setTodoList(newTodoItem);
+            Swal.fire({
+                title: "Good job!",
+                text: "You created a new Task!",
+                icon: "success"
+            });
+        }
+    }
+
+    let deleteTodo = (id) => {
+        MySwal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const newData = todo.filter(value => { return value.id !== id });
+                setTodoList(newData);
+                MySwal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
     return <>
         <Alert title={"THIS IS AN SIMPLE TO DO APP MADE USING ✅ REACT-JS"} />
         <div>
             <h1 className='text-center'>Todo List</h1>
             <div className="container text-center">
                 <div className="row p-2 m-2">
-                    <div className="col">
-                        <input type="text" className="p-1" name="" placeholder='Enter your Task Name' id="" />
+                    <div className="col-5">
+                        <input type="text" className="p-1" onChange={(e) => setTodoName(e.target.value)} value={todoName} name="taskName" placeholder='Enter your Task Name' id="" />
                     </div>
-                    <div className="col">
-                        <input type="datetime-local" className="p-1" name="" id="" />
+                    <div className="col-4">
+                        <input type="date" onChange={(e) => setTodoDate(e.target.value)} value={todoDate} className="p-1" name="taskDate" id="" />
                     </div>
-                    <div className="col">
-                        <button type="button" className="btn btn-success px-4">Add</button>
+                    <div className="col-3">
+                        <button type="button" onClick={() => addTask(todoName, todoDate)} className="btn btn-success px-4">
+                            <IoIosAddCircle /></button>
                     </div>
                 </div>
                 {todo.map((singleTodo) => (
-                    <SingleTodo key={singleTodo.id} todo={singleTodo}></SingleTodo>
+                    <SingleTodo key={singleTodo.id} onclickFunction={deleteTodo} todo={singleTodo}></SingleTodo>
                 ))}
             </div>
         </div>

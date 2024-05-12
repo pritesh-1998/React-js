@@ -1,6 +1,7 @@
 .h1Class {
     text-align: center;
     margin-top: 15px;
+    padding: 20px;
     margin-bottom: 15px;
     /* background-color: aqua; */
 }

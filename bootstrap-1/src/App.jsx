@@ -16,14 +16,22 @@ function App() {
   // const [count, setCount] = useState(0)
   let bikes = ["Raider", "Hayabusa", "Splendor", "Hero Honda"];
   return (
-    <Container>
-      {/* <Clock /> */}
-      {/* <Healthyfood /> */}
-      {/* <Todo /> */}
-      {/* <Calc /> */}
-      <List Listitems={bikes} />
-      {/* <Heading heading={"Good Morning"} /> */}
-    </Container>
+    <>
+      {/* <Container>
+        <Clock />
+        <Healthyfood />
+      </Container> */}
+      <Container>
+        <Todo />
+      </Container>
+      {/* <Container>
+        <Calc />
+      </Container>
+      <Container>
+        <List Listitems={bikes} />
+        <Heading heading={"Good Morning"} />
+      </Container> */}
+    </>
   )
 }
 
