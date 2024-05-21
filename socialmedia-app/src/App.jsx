@@ -9,32 +9,28 @@ import NewPostForm from './components/createPostForm';
 import SinglePost from './components/singlePost';
 import MainCenterContainer from './components/Container/Container';
 import PostContainer from './components/Container/PostContainer';
-import PostListProvider from './store/PostLIst';
+import PostListProvider from './store/PostList';
+import PostListComponent from './components/PostListComponent';
 
 function App() {
     const [selectedTab, setSelectedTab] = useState("Home");
     return (
-        // <PostListProvider>
-        <div className='app-container'>
-            <Sidebar selecteTab={selectedTab} setSelectedTab={setSelectedTab}></Sidebar>
-            <div className='content'>
-                <Header></Header>
-                <MainCenterContainer>
-                    {selectedTab == "Home" ?
-                        <PostContainer>
-                            <SinglePost></SinglePost>
-                            <SinglePost></SinglePost>
-                            <SinglePost></SinglePost>
-                            <SinglePost></SinglePost>
-                            <SinglePost></SinglePost>
-                            <SinglePost></SinglePost>
-                        </PostContainer> :
-                        <NewPostForm></NewPostForm>}
-                </MainCenterContainer>
-                <Footer></Footer>
-            </div>
-        </div >
-        // </PostListProvider>
+        <PostListProvider>
+            <div className='app-container'>
+                <Sidebar selecteTab={selectedTab} setSelectedTab={setSelectedTab}></Sidebar>
+                <div className='content'>
+                    <Header></Header>
+                    <MainCenterContainer>
+                        {selectedTab == "Home" ?
+                            <PostContainer>
+                                <PostListComponent/>
+                            </PostContainer> :
+                            <NewPostForm></NewPostForm>}
+                    </MainCenterContainer>
+                    <Footer></Footer>
+                </div>
+            </div >
+        </PostListProvider>
     )
 }
 
