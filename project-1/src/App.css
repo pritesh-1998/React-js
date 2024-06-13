@@ -4,7 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
-
+.Bill-div{
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
