@@ -8,17 +8,22 @@ const DEFAULT_CONTEXT = {
     deletePost: () => { },
 };
 
-const PostList = createContext(DEFAULT_CONTEXT);
+const PostListContext = createContext(DEFAULT_CONTEXT);
 
 const reducerFunction = (currentPostList, action) => {
+    let newPostList = currentPostList;
     switch (action.type) {
         case 'ADD_POST':
-            return [...currentPostList, action.payload];
+            newPostList = [...currentPostList, action.payload];
+            break;
         case 'DELETE_POST':
-            return currentPostList.filter(post => post.id !== action.payload.id);
+            console.log("inisdeded");
+            newPostList = currentPostList.filter((post) => post.id !== action.payload.id);
+            break;
         default:
-            return currentPostList;
+            newPostList = currentPostList;
     }
+    return newPostList;
 };
 
 function PostListProvider({ children }) {
@@ -28,45 +33,52 @@ function PostListProvider({ children }) {
         postdispatch({ type: 'ADD_POST', payload: post });
     };
 
-    const deletePost = (post) => {
-        postdispatch({ type: 'DELETE_POST', payload: post });
+    const deletePost = (id) => {
+        console.log(id, "---deleted");
+        postdispatch({ type: 'DELETE_POST', payload: id });
     };
 
     return (
-        <PostList.Provider value={{ postList, addPost, deletePost }}>
+        <PostListContext.Provider value={{ postList, addPost, deletePost }}>
             {children}
-        </PostList.Provider>
+        </PostListContext.Provider>
     );
 }
 
-export { PostList, PostListProvider };
+export { PostListContext, PostListProvider };
 export default PostListProvider;
-const defaultPost=[
+const defaultPost = [
     {
-        id:1,
-        title: "Card title 1",
-        desc : "Some quick example text to build on the card title and make up the bulk of the card's content",
-        date : "10/23/2024",
-        author : "SampleBoi",
-        likes:20,
-        tags : ["cars","bikes","porsche"]
+        id: 1,
+        img: "https://dummyimage.com/600x400/000/fff&text=Post+1",
+        title: "Exploring the Mountains",
+        desc: "A journey through the most breathtaking mountain ranges around the world.",
+        date: "05/15/2024",
+        author: "John Doe",
+        likes: 45,
+        userId: 'user1',
+        tags: ["travel", "nature", "mountains"]
     },
     {
-        id:1,
-        title: "Card title 1",
-        desc : "Some quick example text to build on the card title and make up the bulk of the card's content",
-        date : "10/23/2024",
-        author : "SampleBoi",
-        likes:20,
-        tags : ["cars","bikes","porsche"]
+        id: 2,
+        img: "https://dummyimage.com/600x400/000/fff&text=Post+2",
+        title: "The Art of Cooking",
+        desc: "Discover the secrets behind some of the most delicious dishes from various cuisines.",
+        date: "03/22/2024",
+        author: "Jane Smith",
+        likes: 30,
+        userId: 'user2',
+        tags: ["food", "cooking", "recipes"]
     },
     {
-        id:1,
-        title: "Card title 1",
-        desc : "Some quick example text to build on the card title and make up the bulk of the card's content",
-        date : "10/23/2024",
-        author : "SampleBoi",
-        likes:20,
-        tags : ["cars","bikes","porsche"]
+        id: 3,
+        img: "https://dummyimage.com/600x400/000/fff&text=Post+3",
+        title: "Tech Innovations in 2024",
+        desc: "An in-depth look at the most groundbreaking technological advancements of the year.",
+        date: "01/10/2024",
+        author: "TechGuru",
+        likes: 78,
+        userId: 'user3',
+        tags: ["technology", "innovation", "gadgets"]
     }
 ];
