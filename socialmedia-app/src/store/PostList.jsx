@@ -34,8 +34,8 @@ function PostListProvider({ children }) {
         postdispatch({
             type: 'ADD_POST',
             payload: {
-                id: oldLength,
-                img: `https://dummyimage.com/600x400/000/fff&text=Post+${oldLength + 1}`,
+                id: oldLength+1,
+                img: `https://dummyimage.com/600x400/000/fff&text=Post+${oldLength}`,
                 title: post.postTitle,
                 desc: post.postDesc,
                 date: post.postDate,
