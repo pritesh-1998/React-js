@@ -11,14 +11,13 @@ const DEFAULT_CONTEXT = {
 const PostListContext = createContext(DEFAULT_CONTEXT);
 
 const reducerFunction = (currentPostList, action) => {
-    let newPostList = currentPostList;
+    let newPostList;
     switch (action.type) {
         case 'ADD_POST':
-            newPostList = [...currentPostList, action.payload];
+            newPostList = [action.payload, ...currentPostList];
             break;
         case 'DELETE_POST':
-            console.log("inisdeded");
-            newPostList = currentPostList.filter((post) => post.id !== action.payload.id);
+            newPostList = currentPostList.filter((post) => post.id !== action.payload.postID);
             break;
         default:
             newPostList = currentPostList;
@@ -26,16 +25,30 @@ const reducerFunction = (currentPostList, action) => {
     return newPostList;
 };
 
+
 function PostListProvider({ children }) {
     const [postList, postdispatch] = useReducer(reducerFunction, defaultPost);
 
     const addPost = (post) => {
-        postdispatch({ type: 'ADD_POST', payload: post });
+        const oldLength = postList.length;
+        postdispatch({
+            type: 'ADD_POST',
+            payload: {
+                id: oldLength,
+                img: `https://dummyimage.com/600x400/000/fff&text=Post+${oldLength + 1}`,
+                title: post.postTitle,
+                desc: post.postDesc,
+                date: post.postDate,
+                author: post.postAuthor,
+                likes: post.postLikes,
+                userId: post.userId,
+                tags: post.postTags,
+            }
+        });
     };
-
-    const deletePost = (id) => {
-        console.log(id, "---deleted");
-        postdispatch({ type: 'DELETE_POST', payload: id });
+    const deletePost = (postID) => {
+        console.log(postID, "---deleted");
+        postdispatch({ type: 'DELETE_POST', payload: { postID } });
     };
 
     return (

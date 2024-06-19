@@ -6,6 +6,7 @@ import { MdDateRange } from "react-icons/md";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { AiFillDelete } from "react-icons/ai";
 import { PostListContext } from '../store/PostList';
+import { GrLike } from "react-icons/gr";
 
 
 const SinglePost = ({ post }) => {
@@ -23,8 +24,23 @@ const SinglePost = ({ post }) => {
                         <AiFillDelete /> </span>
                     <h5 className="card-title">{post.title}</h5>
                     <p className="card-text">{post.desc}</p>
-                    <p className="card-text"><MdDateRange /> {post.date}</p>
-                    <p className="card-text"><VscAccount /> {post.author}</p>
+                    <div>
+                        {/* <hr /> */}
+                        <div className="row">
+                            <div className="col-md-6">
+                                <p className="card-text"><MdDateRange style={{ verticalAlign: 'text-top', marginRight: '10px' }} /> {post.date}</p>
+                            </div>
+                            <div className="col-md-6">
+                                <p className="card-text"><VscAccount style={{ verticalAlign: 'text-top', marginRight: '10px' }} /> {post.author}</p>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <p className="card-text"><GrLike style={{ verticalAlign: 'text-top', marginRight: '10px' }} />{post.likes}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
                     <h5 className="card-text">
                         <IoPricetagsOutline />{Tags.map((tag, index) => (
                             <span key={index} className="btn btn-warning m-1 p-2">{tag}</span>
